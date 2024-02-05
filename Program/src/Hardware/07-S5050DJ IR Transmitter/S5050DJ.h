@@ -9,8 +9,10 @@
 #ifndef S5050DJ_H_
 #define S5050DJ_H_
 
+#include <queue>
 #include "CTimer.h"
 #include "ProgramConfig.h"
+#include "Callback.h"
 
 #define S5050DJ_ADDR (0x00F7U)
 
@@ -36,7 +38,9 @@
 #define S5050DJ_REPEAT_COMMAND_SLOT_BIT_TIME (2250 - S5050DJ_OFFSET_TIME)
 #define S5050DJ_REPEAT_COMMAND_STOP_BIT_TIME (562 - S5050DJ_OFFSET_TIME)
 
-class S5050DJ : protected CTimer {
+#define MAX_TICKS 67500 / 1000
+
+    class S5050DJ : protected CTimer ,protected Callback{
 private:
 	enum actionSetting_t { INCREASE_BRIGHTNESS = 0x00FFU, INCREASE_SPEED = 0x00FFU, DECREASE_BRIGHTNESS = 0x807FU, DECREASE_SPEED = 0x807FU, TURNOFF_LEDS = 0x40BFU, TURNON_LEDS = 0xC03FU };
 
@@ -45,12 +49,15 @@ private:
 	actionInterruption_t m_externalOutput;
 	activity_t m_externalActivity;
 
+    std::queue<uint32_t> m_commandQueue;
+    uint32_t m_timeoutCounter;
+
 	// Modularize this implementation with the interruption of the CTimer interface.
 	// The program flow will go to this function to execute an action uninterruptedly.
 	// It is a requirement that the following function be static since the pointer to a function is not a specific instance of the class.
-	static void transmitCommand(void);
+	static void transmitCommand(uint32_t command);
 
-	void prepareConditions(void);
+	void prepareConditions();
 	void changeExternalOutput(actionInterruption_t actionInterrupt);
 	bool setAction(actionSetting_t action);
 public:
@@ -69,7 +76,9 @@ public:
     uint8_t getSpeed(void) const;
 	virtual ~S5050DJ() = default;
 
-};
+protected:
+    void callbackMethod(void) override;
+    };
 
 extern S5050DJ *g_leds;
 

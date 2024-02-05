@@ -20,7 +20,7 @@ extern "C" {
 }
 #endif
 
-typedef void (*CTimerHandler)(void);
+typedef void (*CTimerHandler)(uint32_t );
 
 class CTimer : protected Gpio {
 public:
@@ -42,6 +42,7 @@ private:
 protected:
 	enum countUnit_t { MICROS, MILLIS };
 	void adjustTimeCount(uint32_t value, countUnit_t countUnit);
+    uint32_t m_handlerArgument;
 public:
 	CTimer() = delete;
 	CTimer(const Gpio &output, channelFunction_t channelFunction, const CTimerHandler handlerFunction = nullptr);

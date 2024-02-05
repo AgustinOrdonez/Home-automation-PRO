@@ -22,7 +22,7 @@ int main(void) {
 	initServo();	// Initializes the g_servo       ~ Define the SG90S_SERVO_PIN macro in ProgramConfig.h {P0.23}
 //	initDFPlayer(); // Initializes the g_dfplayer    ~ Define the CN13_PINS macro in ProgramConfig.h {P0.17 - P0.16 - P0.00}
 	initUSB0();		// Initializes the g_usb         ~ Define the USB0_PINS macro in ProgramConfig.h {P0.24 - P0.25}
-	initRFID();		// Initializes the g_rfid        ~ Define the SPI_DEBUG_PINS macro in ProgramConfig.h {P0.09 - P0.10 - P0.11 - P0.01}
+//	initRFID();		// Initializes the g_rfid        ~ Define the SPI_DEBUG_PINS macro in ProgramConfig.h {P0.09 - P0.10 - P0.11 - P0.01}
 //	initPreset();	// Initializes the g_preset      ~ Define the ANALOG_FST_CHANNEL_ENABLED macro in ProgramConfig.h {P0.07}
 	initADC();		// Initializes the g_adcExternal ~ Define the ANALOG_SND_CHANNEL_ENABLED macro in ProgramConfig.h {P0.06}
 //	initDAC();		// Initializes the g_dacExternal ~ Define the CN7_PINS and DAC_SND_CHANNEL_ENABLED macros in ProgramConfig.h {P0.29}
@@ -30,9 +30,9 @@ int main(void) {
 //  iotManager.addVariableToUpload("example1", exampleVariable, 1000);
 //  iotManager.addVariableToUpload("keyPressed", keyPressed, 1000);
 
-    QTConnection connection(*g_usb);
+   /* QTConnection connection(*g_usb);
     IoTManager iotManager(&connection);
-    int ledBrightness = 9;
+    int ledBrightness = 9;*/
 
 //    iotManager.registerAction("luz", manualLightControl);
 //    iotManager.registerAction("automatic", modeSelection);
@@ -42,20 +42,20 @@ int main(void) {
 //    int ledBrightness = g_leds->getBrightness();
 //    iotManager.registerState("song", idCancion);
 //    iotManager.registerState("song",isSongPlaying, {"play", "pause"});
-    iotManager.registerState("luz", ledBrightness);
+//    iotManager.registerState("luz", ledBrightness);
 
-    g_lcd->clear();
+   /* g_lcd->clear();
 	g_lcd->write("*------------------*", 0, 0);
     g_lcd->write("|     The Home     |", 1, 0);
 	g_lcd->write("|  Automation PRO  |", 2, 0);
 	g_lcd->write("*------------------*", 3, 0);
 	delay(5000);
-	g_lcd->clear();
+	g_lcd->clear();*/
 
 //	delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000);
-	g_leds->turnOn();
+//	g_leds->turnOn();
 //	delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000);
-	g_leds->setColor(S5050DJ::WHITE);
+//	g_leds->setColor(S5050DJ::WHITE);
 //	delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000);
 
     while (1) {
@@ -66,13 +66,14 @@ int main(void) {
 			g_lcd->write(val, 0, 8);
 			g_lcd->write("%", 0, 11);
 
-			g_leds->setBrightness(val);
+/*			g_leds->setBrightness(val);
 			g_lcd->write("BRIGHT: ", 1, 0);
 			g_lcd->write(g_leds->getBrightness(), 1, 8);
 			g_lcd->write("%", 1, 11);
 			g_lcd->write("SPEED: ", 2, 0);
 			g_lcd->write(g_leds->getSpeed(), 2, 8);
 			g_lcd->write("%", 2, 11);
+			*/
 		}
 
 //		delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000 + 80);

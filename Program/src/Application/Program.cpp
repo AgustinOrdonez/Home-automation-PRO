@@ -16,12 +16,12 @@ int main(void) {
 //	initLCD1602();	// Initializes the g_lcd         ~ Define the CN15_PINS macro in ProgramConfig.h {P0.13 - P0.11 - P0.10 - P0.09 - P0.01 - P0.14}
 	initLCD2004();	// Initializes the g_lcd         ~ Define the CN15_PINS macro in ProgramConfig.h {P0.13 - P0.11 - P0.10 - P0.09 - P0.01 - P0.14}
 //	initKeyboard();	// Initializes the g_keyboard    ~ Define the CN16_PINS macro in ProgramConfig.h {P0.28 - P0.27 - P0.08 - P0.15 - P0.26}
-	initDS3231();	// Initializes the g_ds3231      ~ Define the I2C0_PINS macro in ProgramConfig.h {P0.05 - P0.00}
-	initM24C16();	// Initializes the g_eeprom      ~ Define the I2C0_PINS macro in ProgramConfig.h {P0.05 - P0.00}
+//	initDS3231();	// Initializes the g_ds3231      ~ Define the I2C0_PINS macro in ProgramConfig.h {P0.05 - P0.00}
+//	initM24C16();	// Initializes the g_eeprom      ~ Define the I2C0_PINS macro in ProgramConfig.h {P0.05 - P0.00}
 	initLEDs();		// Initializes the g_leds        ~ Define the LED_TRIP_PIN macro in ProgramConfig.h {P0.29}
-	initServo();	// Initializes the g_servo       ~ Define the SG90S_SERVO_PIN macro in ProgramConfig.h {P0.23}
+//	initServo();	// Initializes the g_servo       ~ Define the SG90S_SERVO_PIN macro in ProgramConfig.h {P0.23}
 //	initDFPlayer(); // Initializes the g_dfplayer    ~ Define the CN13_PINS macro in ProgramConfig.h {P0.17 - P0.16 - P0.00}
-	initUSB0();		// Initializes the g_usb         ~ Define the USB0_PINS macro in ProgramConfig.h {P0.24 - P0.25}
+//	initUSB0();		// Initializes the g_usb         ~ Define the USB0_PINS macro in ProgramConfig.h {P0.24 - P0.25}
 //	initRFID();		// Initializes the g_rfid        ~ Define the SPI_DEBUG_PINS macro in ProgramConfig.h {P0.09 - P0.10 - P0.11 - P0.01}
 //	initPreset();	// Initializes the g_preset      ~ Define the ANALOG_FST_CHANNEL_ENABLED macro in ProgramConfig.h {P0.07}
 	initADC();		// Initializes the g_adcExternal ~ Define the ANALOG_SND_CHANNEL_ENABLED macro in ProgramConfig.h {P0.06}
@@ -53,9 +53,9 @@ int main(void) {
 	g_lcd->clear();*/
 
 //	delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000);
-//	g_leds->turnOn();
+	g_leds->turnOn();
 //	delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000);
-//	g_leds->setColor(S5050DJ::WHITE);
+	g_leds->setColor(S5050DJ::WHITE);
 //	delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000);
 
     while (1) {
@@ -66,14 +66,14 @@ int main(void) {
 			g_lcd->write(val, 0, 8);
 			g_lcd->write("%", 0, 11);
 
-/*			g_leds->setBrightness(val);
+			g_leds->setBrightness(val);
 			g_lcd->write("BRIGHT: ", 1, 0);
 			g_lcd->write(g_leds->getBrightness(), 1, 8);
 			g_lcd->write("%", 1, 11);
 			g_lcd->write("SPEED: ", 2, 0);
 			g_lcd->write(g_leds->getSpeed(), 2, 8);
 			g_lcd->write("%", 2, 11);
-			*/
+
 		}
 
 //		delay((S5050DJ_COMMAND_PERIOD_TIME + S5050DJ_REPEAT_COMMAND_PERIOD_TIME) / 1000 + 80);

@@ -65,7 +65,10 @@ void CTimer::configMatch(uint32_t timeTicks, actionInterruption_t actionInterrup
 	CTIMER0->MR[matchInterruption] = timeTicks == 0 ? 1 : timeTicks; // Expressed in seconds: (1 / FREQ_CLOCK_MCU) * (CTIMER0->PR + 1) * timeTicks
 	CTIMER0->MCR |= (CTIMER_MCR_MR0I_MASK << (matchInterruption * 3)); // Interrupt on MRn: an interrupt is generated when MRn matches the value in the TC.
 	CTIMER0->MCR |= (CTIMER_MCR_MR0R_MASK << (matchInterruption * 3)); // Reset on MRn: the TC will be reset if MRn matches it. 0 = disabled. 1 = enabled.
+    CTIMER0->EMR &= ~(0b11 << (CTIMER_EMR_EMC0_SHIFT + (2 * matchInterruption))); // Determines the functionality of External Match.
+    uint32_t viewEMR = CTIMER0->EMR;
 	CTIMER0->EMR |= (actionInterruption << (CTIMER_EMR_EMC0_SHIFT + (2 * matchInterruption))); // Determines the functionality of External Match.
+     viewEMR = CTIMER0->EMR;
 	CTIMER0->TCR = CTIMER_TCR_CRST_MASK; // Counter reset enabled.
 	CTIMER0->IR = (CTIMER_IR_MR0INT_MASK << matchInterruption);	// Interrupt flag for match channel.
 	g_ctimer = this; // IMPORTANT: Make sure to set a pointer to access the interrupt before starting the counter.

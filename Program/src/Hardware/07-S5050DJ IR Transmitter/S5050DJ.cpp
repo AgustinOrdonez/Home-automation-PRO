@@ -71,7 +71,8 @@ void S5050DJ::transmitCommand(uint32_t command) {
         // Avoid conflicts with other classes that inherit from CTimer class.
         // Stabilized the output pin by connecting it to the idle state.
         g_ctimer_instance->bindHandler(nullptr);
-        g_ctimer_instance->configMatch(S5050DJ_DEBOUNCE_TIME, externalOutput_instance == CLEAR ? SET : CLEAR);
+//        g_ctimer_instance->configMatch(S5050DJ_DEBOUNCE_TIME, externalOutput_instance == CLEAR ? SET : CLEAR);
+        g_ctimer_instance->configMatch(S5050DJ_DEBOUNCE_TIME, externalOutput_instance == CLEAR ? CLEAR : SET);
         g_ctimer_instance = nullptr;
         indexBit = 0;
     }
